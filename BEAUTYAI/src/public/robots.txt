@@ -1,0 +1,40 @@
+# robots.txt для Beauty AI
+# Оптимизировано для поисковых систем и AI краулеров
+
+User-agent: *
+Allow: /
+
+# Разрешить всем AI ботам
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Основные поисковики
+User-agent: Googlebot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap
+Sitemap: https://beauty-ai.ru/sitemap.xml
+
+# Crawl-delay для AI ботов (чтобы не перегружать сервер)
+Crawl-delay: 1
