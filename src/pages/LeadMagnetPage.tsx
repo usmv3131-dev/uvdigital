@@ -1,5 +1,5 @@
-import LeadMagnetApp from "../../../50BOTS/src/App";
-import leadMagnetStyles from "../../../50BOTS/src/index.css?inline";
+import LeadMagnetApp from "./fiftybots/App";
+import leadMagnetStyles from "./fiftybots/index.css?inline";
 import { ScopedStyleHost } from "../components/ScopedStyleHost";
 
 export default function LeadMagnetPage() {

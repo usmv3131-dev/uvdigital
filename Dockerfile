@@ -11,13 +11,10 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM nginx:1.27-alpine AS production
+FROM nginx:1.27-alpine
 RUN apk add --no-cache wget
 COPY .docker/prod/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
-RUN mkdir -p /var/cache/nginx /var/run/nginx /var/log/nginx \
-    && chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/run/nginx /var/log/nginx \
-    && sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD wget -qO- http://localhost:8080/ || exit 1
 USER nginx

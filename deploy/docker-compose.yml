@@ -1,0 +1,9 @@
+services:
+  app:
+    image: ghcr.io/YOUR_ORG/YOUR_REPO:latest
+    environment:
+      APP_ENV: production
+      PORT: 3000
+    ports:
+      - "3000:8080"
+    restart: unless-stopped

@@ -9,12 +9,7 @@ services:
     ports:
       - "${PORT:-3000}:8080"
     restart: unless-stopped
-    read_only: true
-    tmpfs:
-      - /tmp:uid=101,gid=101
-      - /var/cache/nginx:uid=101,gid=101
-      - /var/run/nginx:uid=101,gid=101
-      - /run:uid=101,gid=101
+    user: "0:0"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/"]
       interval: 30s

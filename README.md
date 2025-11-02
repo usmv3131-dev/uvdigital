@@ -1,6 +1,34 @@
 # UVDigital
 
-Моно-репозиторий с несколькими Vite-приложениями (главный фронт `MAIN` и витрины `50BOTS`, `AIMARKETING`, `BEAUTYAI`, `CONTENTAI`, кейсы в `CASES`).
+Моно-репозиторий теперь собран в единое Vite-приложение с маршрутизацией (главная и витрины `50BOTS`, `AIMARKETING`, `BEAUTYAI`, `CONTENTAI`, а также кейсы).
+
+## Запуск локально
+
+```bash
+npm install
+npm run dev      # дев-сервер (порт 3000 по умолчанию)
+npm run preview  # проверка продакшн-сборки локально
+npm run build    # сборка в dist/
+```
+
+### Маршруты SPA
+- `/` — главная страница UVDigital
+- `/beautyai`
+- `/contentai`
+- `/aimarketing`
+- `/50bots`
+- `/cases/beautyaicase`
+- `/cases/contentaicase`
+
+Маршруты работают через `BrowserRouter`. Для статического хостинга добавлен файл `public/_redirects`, чтобы все запросы отдавали `index.html` (например, на Netlify). Для других хостов нужно настроить аналогичный fallback.
+
+## Деплой
+1. `npm run build` — в каталоге `dist/` появляются готовые статические файлы.
+2. Раздайте `dist/` любым статическим сервером или загрузите на платформу (Netlify, Vercel, S3/CloudFront и т.д.).
+   * Для Netlify: просто деплойте `dist/`, `_redirects` уже добавлен.
+   * Для Nginx/Apache: настройте правило отдавать `index.html` на неизвестные пути, чтобы SPA-маршруты работали.
+
+## Docker
 
 ## Docker
 

@@ -20,9 +20,9 @@
         'input-otp@1.4.2': 'input-otp',
         'figma:asset/7cd9208670dfba012ef78d4a65d617022e80cfce.png': path.resolve(__dirname, './src/assets/7cd9208670dfba012ef78d4a65d617022e80cfce.png'),
         'figma:asset/1f7208c65318b1af970ee7126b427f3ab8839513.png': path.resolve(__dirname, './src/assets/1f7208c65318b1af970ee7126b427f3ab8839513.png'),
-        'figma:asset/965928fe63141698447f5b6e638a608c35001c2f.png': path.resolve(__dirname, '../CASES/BEAUTYAICASE/src/assets/965928fe63141698447f5b6e638a608c35001c2f.png'),
-        'figma:asset/52988874fd1be18b3f1272ac5c76061fe3d9b968.png': path.resolve(__dirname, '../CASES/CONTENTAICASE/src/assets/52988874fd1be18b3f1272ac5c76061fe3d9b968.png'),
-        'figma:asset/7be08111b4085c66c2e426ee30d3b3cb055a9f95.png': path.resolve(__dirname, '../CASES/CONTENTAICASE/src/assets/7be08111b4085c66c2e426ee30d3b3cb055a9f95.png'),
+        'figma:asset/965928fe63141698447f5b6e638a608c35001c2f.png': path.resolve(__dirname, './src/pages/cases/beautyaicase/assets/965928fe63141698447f5b6e638a608c35001c2f.png'),
+        'figma:asset/52988874fd1be18b3f1272ac5c76061fe3d9b968.png': path.resolve(__dirname, './src/pages/cases/contentaicase/assets/52988874fd1be18b3f1272ac5c76061fe3d9b968.png'),
+        'figma:asset/7be08111b4085c66c2e426ee30d3b3cb055a9f95.png': path.resolve(__dirname, './src/pages/cases/contentaicase/assets/7be08111b4085c66c2e426ee30d3b3cb055a9f95.png'),
         'embla-carousel-react@8.6.0': 'embla-carousel-react',
         'cmdk@1.1.1': 'cmdk',
         'class-variance-authority@0.7.1': 'class-variance-authority',
@@ -55,23 +55,16 @@
         '@': path.resolve(__dirname, './src'),
       },
     },
-    build: {
+  build: {
       target: 'esnext',
-      outDir: 'build',
+      outDir: 'dist',
+      emptyOutDir: true,
     },
     server: {
       port: 3000,
       open: true,
       fs: {
-        allow: [
-          path.resolve(__dirname),
-          path.resolve(__dirname, '../50BOTS'),
-          path.resolve(__dirname, '../AIMARKETING'),
-          path.resolve(__dirname, '../BEAUTYAI'),
-          path.resolve(__dirname, '../CONTENTAI'),
-          path.resolve(__dirname, '../CASES/BEAUTYAICASE'),
-          path.resolve(__dirname, '../CASES/CONTENTAICASE'),
-        ],
+        allow: [path.resolve(__dirname)],
       },
     },
   });

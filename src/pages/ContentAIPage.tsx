@@ -1,5 +1,5 @@
-import ContentAIApp from "../../../CONTENTAI/src/App";
-import contentStyles from "../../../CONTENTAI/src/index.css?inline";
+import ContentAIApp from "./contentai/App";
+import contentStyles from "./contentai/index.css?inline";
 import { ScopedStyleHost } from "../components/ScopedStyleHost";
 
 export default function ContentAIPage() {
