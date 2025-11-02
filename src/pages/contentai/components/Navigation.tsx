@@ -63,7 +63,7 @@ function NavigationComponent() {
           </motion.a>
 
           {/* Actions */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-4">
             {/* Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
@@ -90,7 +90,7 @@ function NavigationComponent() {
             {/* CTA */}
             <motion.button
               onClick={scrollToContact}
-              className="px-5 sm:px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 text-white dark:text-white rounded-full hover:from-blue-600 hover:to-cyan-600 dark:hover:from-blue-300 dark:hover:to-cyan-300 transition-all shadow-sm dark:shadow-blue-500/30 relative overflow-hidden group"
+              className="px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 text-white dark:text-white rounded-full hover:from-blue-600 hover:to-cyan-600 dark:hover:from-blue-300 dark:hover:to-cyan-300 transition-all shadow-sm dark:shadow-blue-500/30 relative overflow-hidden group"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Связаться с нами"

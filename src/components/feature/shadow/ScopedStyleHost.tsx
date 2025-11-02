@@ -53,6 +53,8 @@ export function ScopedStyleHost({ styles, children, fallback = null, scopeId }: 
       });
     };
 
+    // синхронизуем классы/атрибуты html внутри shadow root,
+    // чтобы работали темы (light/dark) и другие глобальные классы
     cloneClassesAndAttributes();
 
     const observer = new MutationObserver(cloneClassesAndAttributes);
@@ -73,9 +75,7 @@ export function ScopedStyleHost({ styles, children, fallback = null, scopeId }: 
         shadow.removeChild(shadow.firstChild);
       }
     };
-  }, [styles, scopeId]);
+  }, [styles]);
 
   return <div ref={hostRef}>{portalTarget ? createPortal(children, portalTarget) : fallback}</div>;
 }
-
-export default ScopedStyleHost;

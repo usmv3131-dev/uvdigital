@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Code2, Database, Sparkles } from 'lucide-react';
+import { Code2, Database, Server, Sparkles } from 'lucide-react';
 import { AnimatedCard } from './AnimatedCard';
 
 const techStack = [
@@ -10,8 +10,9 @@ const techStack = [
     technologies: [
       { name: 'React', icon: '⚛️' },
       { name: 'TypeScript', icon: '📘' },
+      { name: 'Vite', icon: '⚡' },
       { name: 'Tailwind CSS', icon: '🎨' },
-      { name: 'Motion', icon: '✨' },
+      { name: 'Framer Motion', icon: '✨' },
     ],
   },
   {
@@ -19,10 +20,11 @@ const techStack = [
     icon: Database,
     color: 'from-purple-500 to-pink-500',
     technologies: [
-      { name: 'Node.js', icon: '🟢' },
-      { name: 'Express', icon: '⚡' },
+      { name: 'Node.js 20', icon: '🟢' },
+      { name: 'NestJS', icon: '🚀' },
       { name: 'PostgreSQL', icon: '🐘' },
       { name: 'Redis', icon: '🔴' },
+      { name: 'Prisma', icon: '🧩' },
     ],
   },
   {
@@ -30,10 +32,21 @@ const techStack = [
     icon: Sparkles,
     color: 'from-amber-500 to-orange-500',
     technologies: [
-      { name: 'Stable Diffusion', icon: '🎨' },
-      { name: 'Python', icon: '🐍' },
-      { name: 'FastAPI', icon: '⚡' },
-      { name: 'TensorFlow', icon: '🧠' },
+      { name: 'GPT-4o', icon: '🧠' },
+      { name: 'Claude 3', icon: '🪄' },
+      { name: 'Stable Diffusion XL', icon: '🎨' },
+      { name: 'LangChain', icon: '🔗' },
+    ],
+  },
+  {
+    category: 'Инфраструктура',
+    icon: Server,
+    color: 'from-green-500 to-emerald-500',
+    technologies: [
+      { name: 'Docker', icon: '🐳' },
+      { name: 'Kubernetes', icon: '☸️' },
+      { name: 'Grafana + Prometheus', icon: '📈' },
+      { name: 'S3 совместимые хранилища', icon: '🗃️' },
     ],
   },
 ];
@@ -71,7 +84,7 @@ export function TechStackSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {techStack.map((stack, index) => (
             <AnimatedCard key={index} delay={index * 0.1}>
               <motion.div
@@ -122,14 +135,14 @@ export function TechStackSection() {
           <h3 className="mb-4">Производительность и надёжность</h3>
           <p className="text-foreground/70 mb-8 max-w-2xl mx-auto">
             Архитектура платформы спроектирована для высокой производительности и масштабируемости.
-            Время отклика API {'<'} 100ms, доступность 99.9%
+            Время отклика API {'<'} 90ms, доступность 99.95%
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: '< 100ms', label: 'Отклик API' },
-              { value: '99.9%', label: 'Uptime' },
-              { value: '< 2s', label: 'Загрузка страницы' },
-              { value: '10K+', label: 'Запросов/мин' },
+              { value: '< 90ms', label: 'Отклик API' },
+              { value: '99.95%', label: 'Доступность' },
+              { value: '1.8s', label: 'Загрузка SPA' },
+              { value: '2.5K+', label: 'Диалогов/мин' },
             ].map((metric, index) => (
               <motion.div
                 key={index}

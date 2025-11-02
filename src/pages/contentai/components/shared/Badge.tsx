@@ -25,10 +25,10 @@ const iconStyles = {
 export function Badge({ icon: Icon, text, variant = "blue" }: BadgeProps) {
   return (
     <div
-      className={`inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 backdrop-blur-sm border rounded-full transition-colors ${variantStyles[variant]}`}
+      className={`inline-flex items-center gap-2 px-4 py-2 backdrop-blur-sm border rounded-full transition-colors ${variantStyles[variant]}`}
     >
       <Icon size={16} className={iconStyles[variant]} />
-      <span className="text-xs sm:text-sm">{text}</span>
+      <span className="text-sm">{text}</span>
     </div>
   );
 }

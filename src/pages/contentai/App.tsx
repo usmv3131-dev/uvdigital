@@ -2,14 +2,7 @@ import { lazy, Suspense, ReactNode } from "react";
 import { ThemeProvider } from "./lib/theme-context";
 import { Navigation } from "./components/Navigation";
 import { SEOHead, StructuredData } from "./components/SEOHead";
-
-// Lazy load heavy sections for better performance
-const HeroSection = lazy(() =>
-  import("./components/HeroSection").then((module) => ({
-    default: module.HeroSection,
-  }))
-);
-
+import { HeroSection } from "./components/HeroSection";
 const HowItWorksSection = lazy(() =>
   import("./components/HowItWorksSection").then((module) => ({
     default: module.HowItWorksSection,
@@ -74,7 +67,7 @@ export default function App() {
         <Navigation />
         
         {/* Main Content */}
-        <main id="main-content" role="main">
+        <main id="main-content" role="main" className="pt-24 sm:pt-28 lg:pt-32">
           {/* Hero Section */}
           <SuspenseSection sectionId="hero">
             <HeroSection />

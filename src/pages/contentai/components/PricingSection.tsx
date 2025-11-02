@@ -57,7 +57,7 @@ function PricingSectionComponent() {
   return (
     <section 
       id="pricing"
-      className="relative py-16 md:py-32 bg-white dark:bg-slate-900 overflow-hidden transition-colors" 
+      className="relative py-20 md:py-32 bg-white dark:bg-slate-900 overflow-hidden transition-colors" 
       aria-labelledby="pricing-title"
       ref={ref}
     >
@@ -109,7 +109,7 @@ function PricingSectionComponent() {
 
         {/* 3D Bottom Info Badge */}
         <motion.div 
-          className="text-center mt-10 md:mt-12"
+          className="text-center mt-12"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.5 }}
@@ -169,7 +169,7 @@ function ThreeDDiscountBadge() {
           rotateY,
           transformStyle: "preserve-3d",
         }}
-        className="relative inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border-2 border-yellow-200/50 dark:border-yellow-500/50 rounded-2xl backdrop-blur-sm shadow-xl dark:shadow-yellow-500/30"
+        className="relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border-2 border-yellow-200/50 dark:border-yellow-500/50 rounded-2xl backdrop-blur-sm shadow-xl dark:shadow-yellow-500/30"
       >
         {/* Glowing effect */}
         <motion.div
@@ -195,7 +195,7 @@ function ThreeDDiscountBadge() {
         </motion.div>
 
         <div className="relative z-10">
-          <span className="text-blue-900 dark:text-yellow-300 font-bold text-base sm:text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
+          <span className="text-blue-900 dark:text-yellow-300 font-bold text-lg" style={{ fontFamily: 'var(--font-heading)' }}>
             Скидки при совместной покупке с Beauty AI
           </span>
         </div>

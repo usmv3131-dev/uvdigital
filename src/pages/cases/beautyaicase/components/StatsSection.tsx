@@ -1,42 +1,51 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { motion } from 'motion/react';
 import { TrendingUp, Users, Clock, Award } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 interface Stat {
   icon: any;
-  value: string;
+  target: number;
   label: string;
   change: string;
   color: string;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
 }
 
 const stats: Stat[] = [
   {
     icon: TrendingUp,
-    value: '+68%',
-    label: 'Рост записей',
-    change: 'за первые 3 месяца',
-    color: 'from-green-500 to-emerald-500',
+    target: 38,
+    prefix: '+',
+    suffix: '%',
+    label: 'Рост повторных записей',
+    change: 'за первые 90 дней запуска',
+    color: 'from-rose-500 to-pink-500',
   },
   {
     icon: Users,
-    value: '150+',
-    label: 'Салонов в системе',
-    change: 'активных пользователей',
+    target: 1200,
+    suffix: '+',
+    label: 'Диалогов в месяц',
+    change: 'Beauty AI обрабатывает без участия администратора',
     color: 'from-blue-500 to-cyan-500',
   },
   {
     icon: Clock,
-    value: '15ч',
-    label: 'Экономия времени',
-    change: 'в неделю на администрирование',
+    target: 16,
+    suffix: ' ч/нед',
+    label: 'Освобождено времени команды',
+    change: 'администраторы переключены на сервис и продажи',
     color: 'from-purple-500 to-pink-500',
   },
   {
     icon: Award,
-    value: '4.9',
-    label: 'Удовлетворённость',
-    change: 'средняя оценка от владельцев',
+    target: 4.8,
+    decimals: 1,
+    suffix: ' / 5',
+    label: 'Оценка клиентов',
+    change: 'по опросу постоянных гостей сети',
     color: 'from-amber-500 to-orange-500',
   },
 ];
@@ -46,37 +55,32 @@ function AnimatedStat({ stat, index }: { stat: Stat; index: number }) {
   const Icon = stat.icon;
 
   useEffect(() => {
+    let intervalId: ReturnType<typeof setInterval> | undefined;
     const timer = setTimeout(() => {
-      const target = stat.value.includes('%')
-        ? parseInt(stat.value)
-        : stat.value.includes('ч')
-        ? 15
-        : stat.value === '4.9'
-        ? 4.9
-        : 150;
-
       let current = 0;
-      const increment = target / 50;
-      const interval = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          current = target;
-          clearInterval(interval);
-        }
+      const precision = stat.decimals ? Math.pow(10, stat.decimals) : 1;
+      const increment = Math.max(stat.target / 60, 1 / precision);
+      intervalId = setInterval(() => {
+        current = Math.min(current + increment, stat.target);
         setCount(current);
+        if (current >= stat.target) {
+          clearInterval(intervalId);
+        }
       }, 30);
     }, index * 100);
 
-    return () => clearTimeout(timer);
-  }, [stat.value, index]);
+    return () => {
+      clearTimeout(timer);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [stat.target, stat.decimals, index]);
 
-  const displayValue = stat.value.includes('%')
-    ? `+${Math.round(count)}%`
-    : stat.value.includes('ч')
-    ? `${Math.round(count)}ч`
-    : stat.value === '4.9'
-    ? count.toFixed(1)
-    : `${Math.round(count)}+`;
+  const decimals = stat.decimals ?? 0;
+  const numericValue =
+    decimals > 0 ? count.toFixed(decimals) : Math.round(count).toString();
+  const displayValue = `${stat.prefix ?? ''}${numericValue}${stat.suffix ?? ''}`;
 
   return (
     <motion.div

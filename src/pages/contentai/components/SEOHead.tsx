@@ -15,12 +15,15 @@ interface SEOHeadProps {
  * Оптимизировано для поисковых систем и AI-парсинга
  * Включает: Meta tags, Open Graph, Twitter Card, Schema.org
  */
+const YANDEX_VERIFICATION = import.meta.env.VITE_YANDEX_VERIFICATION ?? "";
+const GOOGLE_VERIFICATION = import.meta.env.VITE_GOOGLE_VERIFICATION ?? "";
+
 function SEOHeadComponent({
   title = "Content AI — AI-контент бот для салонов красоты | Автоматизация SMM",
-  description = "Content AI создает контент-план, генерирует посты, Stories и Reels для салонов красоты. Интеграция с Beauty AI, анализ эффективности, автоматическая оптимизация. Начните бесплатно!",
-  keywords = "AI контент, контент для салона красоты, SMM автоматизация, генерация контента, Beauty AI, контент-план, посты для Instagram, AI маркетинг, контент бот, SMM для салона",
-  ogImage = "https://contentai.beauty/og-image.jpg",
-  canonicalUrl = "https://contentai.beauty",
+  description = "Content AI создаёт персональный контент-план и автоматически выпускает посты, Stories и Reels для салонов красоты. Интеграция с Beauty AI, аналитика эффективности и оптимизация контента.",
+  keywords = "Content AI, AI-контент, генерация контента, SMM, Beauty AI, автоворонки, контент бот",
+  ogImage = "https://uvdigital.ru/assets/og-contentai.jpg",
+  canonicalUrl = "https://uvdigital.ru/contentai",
   type = "website",
   locale = "ru_RU",
 }: SEOHeadProps) {
@@ -54,8 +57,8 @@ function SEOHeadComponent({
     updateMetaTag("viewport", "width=device-width, initial-scale=1, maximum-scale=5");
     
     // Language
-    updateMetaTag("language", "Russian");
-    
+    updateMetaTag("language", "ru-RU");
+
     // Open Graph
     updateMetaTag("og:title", title, true);
     updateMetaTag("og:description", description, true);
@@ -67,7 +70,8 @@ function SEOHeadComponent({
     updateMetaTag("og:image:alt", "Content AI — AI-контент бот для салонов красоты", true);
     updateMetaTag("og:locale", locale, true);
     updateMetaTag("og:site_name", "Content AI", true);
-    
+    updateMetaTag("og:image:secure_url", ogImage, true);
+
     // Twitter Card
     updateMetaTag("twitter:card", "summary_large_image");
     updateMetaTag("twitter:title", title);
@@ -80,7 +84,13 @@ function SEOHeadComponent({
     updateMetaTag("apple-mobile-web-app-capable", "yes");
     updateMetaTag("apple-mobile-web-app-status-bar-style", "default");
     updateMetaTag("format-detection", "telephone=yes");
-    
+    if (GOOGLE_VERIFICATION) {
+      updateMetaTag("google-site-verification", GOOGLE_VERIFICATION);
+    }
+    if (YANDEX_VERIFICATION) {
+      updateMetaTag("yandex-verification", YANDEX_VERIFICATION);
+    }
+
     // Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
@@ -100,6 +110,11 @@ function SEOHeadComponent({
     }
     alternate.setAttribute("href", canonicalUrl);
 
+    const html = document.documentElement;
+    if (html) {
+      html.lang = locale.split("_")[0]?.toLowerCase() ?? "ru";
+    }
+
   }, [title, description, keywords, ogImage, canonicalUrl, type, locale]);
 
   return null;
@@ -118,6 +133,7 @@ export function StructuredData() {
     "name": "Content AI",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web",
+    "url": "https://uvdigital.ru/contentai",
     "description": "AI-контент бот для салонов красоты. Автоматическая генерация контента, создание контент-плана, интеграция с Beauty AI",
     "offers": {
       "@type": "AggregateOffer",
@@ -149,7 +165,7 @@ export function StructuredData() {
       "Генерация постов, Stories, Reels",
       "Оптимизация контента"
     ],
-    "screenshot": "https://contentai.beauty/screenshot.jpg",
+    "screenshot": "https://uvdigital.ru/assets/screenshots/contentai-hero.jpg",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.8",

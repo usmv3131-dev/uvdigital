@@ -117,7 +117,7 @@ function FeatureCard({ feature, index }: FeatureCardProps) {
           }}
         >
           <div className="relative group h-full">
-            <div className="relative h-full bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm border border-blue-200/50 dark:border-blue-500/30 rounded-3xl p-6 md:p-8 overflow-hidden hover:shadow-2xl dark:hover:shadow-blue-500/40 transition-all duration-300">
+            <div className="relative h-full bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm border border-blue-200/50 dark:border-blue-500/30 rounded-3xl p-8 overflow-hidden hover:shadow-2xl dark:hover:shadow-blue-500/40 transition-all duration-300">
               {/* Animated gradient overlay */}
               <motion.div 
                 className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
@@ -134,7 +134,7 @@ function FeatureCard({ feature, index }: FeatureCardProps) {
               
               {/* 3D Floating Icon */}
               <motion.div
-                className={`inline-flex p-3 md:p-4 rounded-2xl ${feature.iconBg} border border-blue-200/30 dark:border-blue-500/30 shadow-lg dark:shadow-blue-500/30`}
+                className={`inline-flex p-4 rounded-2xl ${feature.iconBg} border border-blue-200/30 dark:border-blue-500/30 shadow-lg dark:shadow-blue-500/30`}
                 whileHover={{
                   rotateY: 360,
                   scale: 1.1,
@@ -152,7 +152,7 @@ function FeatureCard({ feature, index }: FeatureCardProps) {
               </motion.div>
 
               {/* Content */}
-              <div className="relative mt-4 space-y-3 sm:space-y-4">
+              <div className="relative mt-4 space-y-4">
                 <h3 className="text-blue-900 dark:text-blue-400 font-bold tracking-tight" style={{ fontFamily: 'var(--font-heading)' }}>
                   {feature.title}
                 </h3>
@@ -206,7 +206,7 @@ function FeatureCard({ feature, index }: FeatureCardProps) {
             transform: "rotateY(180deg)",
           }}
         >
-          <div className="relative h-full bg-gradient-to-br from-slate-800/90 to-slate-900/90 dark:from-blue-900/50 dark:to-purple-900/50 backdrop-blur-sm border border-blue-400/50 dark:border-cyan-400/50 rounded-3xl p-6 md:p-8 overflow-hidden shadow-2xl">
+          <div className="relative h-full bg-gradient-to-br from-slate-800/90 to-slate-900/90 dark:from-blue-900/50 dark:to-purple-900/50 backdrop-blur-sm border border-blue-400/50 dark:border-cyan-400/50 rounded-3xl p-8 overflow-hidden shadow-2xl">
             {/* Glowing background */}
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 dark:from-blue-400/30 dark:to-purple-400/30" aria-hidden="true" />
             
@@ -282,7 +282,7 @@ function FeaturesSectionComponent() {
   };
 
   return (
-    <section id="features" className="relative py-16 md:py-32 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 transition-colors overflow-hidden" aria-labelledby="features-title">
+    <section id="features" className="relative py-20 md:py-32 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 transition-colors overflow-hidden" aria-labelledby="features-title">
       <BackgroundDecoration />
 
       {/* Parallax floating elements */}
@@ -319,17 +319,17 @@ function FeaturesSectionComponent() {
           />
 
           {/* 3D Features Grid */}
-          <div className="grid gap-5 md:grid-cols-2 md:gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             {features.map((feature, index) => (
               <FeatureCard key={feature.title} feature={feature} index={index} />
             ))}
           </div>
 
           {/* Bottom CTA with 3D effect */}
-          <motion.div variants={fadeInUpVariants.item} className="text-center mt-12 md:mt-16">
+          <motion.div variants={fadeInUpVariants.item} className="text-center mt-16">
             <motion.button
               onClick={scrollToContact}
-              className="inline-flex items-center gap-3 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 text-white dark:text-white rounded-2xl hover:from-blue-600 hover:to-cyan-600 dark:hover:from-blue-300 dark:hover:to-cyan-300 transition-all shadow-lg shadow-blue-300/30 dark:shadow-blue-500/50 font-semibold tracking-wide"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 text-white dark:text-white rounded-2xl hover:from-blue-600 hover:to-cyan-600 dark:hover:from-blue-300 dark:hover:to-cyan-300 transition-all shadow-lg shadow-blue-300/30 dark:shadow-blue-500/50 font-semibold tracking-wide"
               whileHover={{ 
                 scale: 1.05,
                 rotateX: -5,

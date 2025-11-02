@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { fadeInUpFastVariants } from "../lib/motion-variants";
-import { SparkleButton } from "./ui/sparkle-button";
+import { SparkleButtonLazy } from "./ui/sparkle-button-lazy";
 
 type FormData = {
   name: string;
@@ -74,7 +74,7 @@ function ContactFormSectionComponent() {
   return (
     <section
       id="contact"
-      className="relative py-16 md:py-32 bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 overflow-hidden transition-colors"
+      className="relative py-20 md:py-32 bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 overflow-hidden transition-colors"
       aria-labelledby="contact-title"
     >
       {/* Background decorations */}
@@ -96,7 +96,7 @@ function ContactFormSectionComponent() {
           {/* Section Header */}
           <motion.div
             variants={fadeInUpFastVariants.item}
-            className="text-center space-y-3 sm:space-y-4 mb-10 md:mb-12"
+            className="text-center space-y-4 mb-12"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-blue-500/10 backdrop-blur-sm border border-blue-200/50 dark:border-blue-500/50 rounded-full shadow-sm dark:shadow-blue-500/20">
               <Sparkles
@@ -110,13 +110,13 @@ function ContactFormSectionComponent() {
             </div>
             <h2
               id="contact-title"
-              className="text-3xl sm:text-4xl text-blue-900 dark:text-blue-400 font-bold tracking-tight"
+              className="text-blue-900 dark:text-blue-400 font-bold tracking-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Запустим контент для вашего салона
             </h2>
             <p
-              className="text-slate-600 dark:text-cyan-300/70 text-base sm:text-lg max-w-2xl mx-auto"
+              className="text-slate-600 dark:text-cyan-300/70 text-lg max-w-2xl mx-auto"
               style={{
                 fontFamily: "var(--font-body)",
                 letterSpacing: "0.01em",
@@ -131,7 +131,7 @@ function ContactFormSectionComponent() {
             variants={fadeInUpFastVariants.item}
             className="relative group"
           >
-            <div className="relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm border border-blue-200/50 dark:border-blue-500/30 rounded-3xl p-6 md:p-12 overflow-hidden hover:shadow-2xl dark:hover:shadow-blue-500/30 transition-all duration-300">
+            <div className="relative bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm border border-blue-200/50 dark:border-blue-500/30 rounded-3xl p-8 md:p-12 overflow-hidden hover:shadow-2xl dark:hover:shadow-blue-500/30 transition-all duration-300">
               {/* Gradient overlay */}
               <div
                 className="absolute inset-0 bg-gradient-to-br from-blue-100/20 via-transparent to-cyan-100/20 dark:from-blue-500/10 dark:via-transparent dark:to-cyan-500/10 opacity-50"
@@ -140,11 +140,11 @@ function ContactFormSectionComponent() {
 
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="relative space-y-6 md:space-y-8"
+                className="relative space-y-8"
                 noValidate
               >
                 {/* Personal Info */}
-                <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+                <div className="grid md:grid-cols-2 gap-6">
                   {/* Name */}
                   <motion.div
                     variants={fadeInUpFastVariants.item}
@@ -237,7 +237,7 @@ function ContactFormSectionComponent() {
                 </div>
 
                 {/* Business Info */}
-                <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+                <div className="grid md:grid-cols-2 gap-6">
                   {/* Email */}
                   <motion.div
                     variants={fadeInUpFastVariants.item}
@@ -330,7 +330,7 @@ function ContactFormSectionComponent() {
                 </div>
 
                 {/* Selects */}
-                <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+                <div className="grid md:grid-cols-2 gap-6">
                   {/* Social Networks */}
                   <motion.div
                     variants={fadeInUpFastVariants.item}
@@ -572,7 +572,7 @@ function ContactFormSectionComponent() {
                   className="pt-4"
                 >
                   {!isSubmitted ? (
-                    <SparkleButton
+                    <SparkleButtonLazy
                       type="submit"
                       className="w-full shadow-lg shadow-blue-300/30 dark:shadow-blue-500/50"
                       showSparkles={true}
@@ -581,7 +581,7 @@ function ContactFormSectionComponent() {
                         <Send size={20} aria-hidden="true" />
                         Получить контент-план
                       </span>
-                    </SparkleButton>
+                    </SparkleButtonLazy>
                   ) : (
                     <motion.div
                       initial={{ scale: 0.9, opacity: 0 }}

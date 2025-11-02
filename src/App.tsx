@@ -1,15 +1,15 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
-import { HomePage } from "./pages/HomePage";
-import { PageSwitcher } from "./components/PageSwitcher";
+import { HomePage } from "./pages/home";
+import { PageSwitcher } from "./components/feature/layout/PageSwitcher";
 
-const BeautyAIPage = lazy(() => import("./pages/BeautyAIPage"));
-const ContentAIPage = lazy(() => import("./pages/ContentAIPage"));
-const AIMarketingPage = lazy(() => import("./pages/AIMarketingPage"));
-const LeadMagnetPage = lazy(() => import("./pages/LeadMagnetPage"));
-const BeautyAICasePage = lazy(() => import("./pages/cases/BeautyAICasePage"));
-const ContentAICasePage = lazy(() => import("./pages/cases/ContentAICasePage"));
+const BeautyAIPage = lazy(() => import("./pages/beautyai"));
+const ContentAIPage = lazy(() => import("./pages/contentai"));
+const AIMarketingPage = lazy(() => import("./pages/aimarketing"));
+const LeadMagnetPage = lazy(() => import("./pages/fiftybots"));
+const BeautyAICasePage = lazy(() => import("./pages/cases/beautyaicase"));
+const ContentAICasePage = lazy(() => import("./pages/cases/contentaicase"));
 
 function PageFallback() {
   return (

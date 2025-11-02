@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles, Zap, Stars, Cpu } from "lucide-react";
 import { memo, useRef, MouseEvent } from "react";
 import { fadeInUpVariants, floatingAnimation, floatingTransition } from "../lib/motion-variants";
 import { BackgroundDecoration } from "./shared/BackgroundDecoration";
-import { SparkleButton } from "./ui/sparkle-button";
+import { SparkleButtonLazy } from "./ui/sparkle-button-lazy";
 import { MagneticButton } from "./shared/MagneticButton";
 
 function HeroSectionComponent() {
@@ -60,7 +60,7 @@ function HeroSectionComponent() {
     >
       {/* Animated Background Layers */}
       <motion.div 
-        className="absolute inset-0 opacity-30 dark:opacity-20"
+        className="hidden sm:block absolute inset-0 opacity-30 dark:opacity-20"
         style={{ 
           rotateX,
           rotateY,
@@ -73,7 +73,7 @@ function HeroSectionComponent() {
 
       {/* 3D Floating Orbs */}
       <motion.div
-        className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 dark:from-blue-500/30 dark:to-cyan-500/30 rounded-full blur-3xl"
+        className="hidden sm:block absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 dark:from-blue-500/30 dark:to-cyan-500/30 rounded-full blur-3xl"
         animate={{
           y: [0, -50, 0],
           x: [0, 30, 0],
@@ -91,7 +91,7 @@ function HeroSectionComponent() {
       />
       
       <motion.div
-        className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-purple-400/20 to-pink-400/20 dark:from-purple-500/30 dark:to-pink-500/30 rounded-full blur-3xl"
+        className="hidden sm:block absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-purple-400/20 to-pink-400/20 dark:from-purple-500/30 dark:to-pink-500/30 rounded-full blur-3xl"
         animate={{
           y: [0, 50, 0],
           x: [0, -30, 0],
@@ -110,13 +110,13 @@ function HeroSectionComponent() {
 
       <motion.div
         style={{ scale, opacity }}
-        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 sm:pt-32 sm:pb-20"
+        className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20"
       >
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeInUpVariants.container}
-          className="text-center space-y-6 sm:space-y-8 max-w-4xl mx-auto"
+          className="text-center space-y-8 max-w-4xl mx-auto"
           style={{ transformStyle: "preserve-3d" }}
         >
           {/* Badge with 3D effect */}
@@ -129,7 +129,7 @@ function HeroSectionComponent() {
             }}
             style={{ transformStyle: "preserve-3d" }}
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white/60 dark:bg-blue-500/10 backdrop-blur-sm border border-blue-200/50 dark:border-blue-500/50 rounded-full shadow-lg dark:shadow-blue-500/20">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-blue-500/10 backdrop-blur-sm border border-blue-200/50 dark:border-blue-500/50 rounded-full shadow-lg dark:shadow-blue-500/20">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
@@ -147,7 +147,7 @@ function HeroSectionComponent() {
           >
             <motion.h1 
               id="hero-title"
-              className="text-blue-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-blue-300 dark:via-blue-400 dark:to-cyan-300 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
+              className="text-blue-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-blue-300 dark:via-blue-400 dark:to-cyan-300 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
               style={{ 
                 fontFamily: 'var(--font-heading)',
                 transformStyle: "preserve-3d",
@@ -223,7 +223,7 @@ function HeroSectionComponent() {
           {/* Subheading */}
           <motion.p 
             variants={fadeInUpVariants.item} 
-            className="text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-cyan-300/80 leading-relaxed max-w-3xl mx-auto" 
+            className="text-xl md:text-2xl text-slate-600 dark:text-cyan-300/80 leading-relaxed max-w-3xl mx-auto" 
             style={{ 
               fontFamily: 'var(--font-body)', 
               letterSpacing: '0.01em',
@@ -236,7 +236,7 @@ function HeroSectionComponent() {
           {/* 3D CTA Buttons */}
           <motion.div 
             variants={fadeInUpVariants.item} 
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center pt-4"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4"
             style={{ transformStyle: "preserve-3d" }}
           >
             <motion.div
@@ -248,7 +248,7 @@ function HeroSectionComponent() {
               }}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <SparkleButton
+              <SparkleButtonLazy
                 onClick={scrollToContact}
                 className="shadow-2xl shadow-blue-300/40 dark:shadow-blue-500/60"
               >
@@ -256,12 +256,12 @@ function HeroSectionComponent() {
                   Запустить бесплатно
                   <ArrowRight size={20} aria-hidden="true" />
                 </span>
-              </SparkleButton>
+              </SparkleButtonLazy>
             </motion.div>
 
             <MagneticButton
               onClick={scrollToExamples}
-              className="px-6 sm:px-8 py-3 sm:py-4 bg-white/60 dark:bg-blue-500/10 backdrop-blur-sm text-blue-900 dark:text-blue-400 border border-blue-200/50 dark:border-blue-500/50 rounded-2xl hover:bg-white/80 dark:hover:bg-blue-500/20 transition-all font-semibold tracking-wide shadow-lg"
+              className="px-8 py-4 bg-white/60 dark:bg-blue-500/10 backdrop-blur-sm text-blue-900 dark:text-blue-400 border border-blue-200/50 dark:border-blue-500/50 rounded-2xl hover:bg-white/80 dark:hover:bg-blue-500/20 transition-all font-semibold tracking-wide shadow-lg"
               strength={0.2}
             >
               Посмотреть примеры
@@ -271,7 +271,7 @@ function HeroSectionComponent() {
           {/* 3D Floating Status Card */}
           <motion.div
             variants={fadeInUpVariants.item}
-            className="inline-block mt-10 sm:mt-12"
+            className="inline-block mt-12"
             style={{ transformStyle: "preserve-3d" }}
           >
             <motion.div

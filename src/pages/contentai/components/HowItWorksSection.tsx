@@ -30,7 +30,7 @@ function HowItWorksSectionComponent() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="how-it-works" className="relative py-16 md:py-32 bg-white dark:bg-slate-900 transition-colors" aria-labelledby="how-it-works-title">
+    <section id="how-it-works" className="relative py-20 md:py-32 bg-white dark:bg-slate-900 transition-colors" aria-labelledby="how-it-works-title">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -49,7 +49,7 @@ function HowItWorksSectionComponent() {
           />
 
           {/* Steps Grid */}
-          <div className="grid gap-6 md:grid-cols-3 md:gap-8 lg:gap-12">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
             {steps.map((step, index) => (
               <motion.article
                 key={step.number}
@@ -58,16 +58,16 @@ function HowItWorksSectionComponent() {
                 transition={{ duration: 0.3 }}
                 className="relative group"
               >
-                <div className="relative bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800/50 dark:to-slate-800/30 border border-blue-200/50 dark:border-blue-500/30 rounded-3xl p-6 md:p-8 overflow-hidden hover:shadow-xl dark:hover:shadow-blue-500/20 transition-all duration-300">
+                <div className="relative bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800/50 dark:to-slate-800/30 border border-blue-200/50 dark:border-blue-500/30 rounded-3xl p-8 overflow-hidden hover:shadow-xl dark:hover:shadow-blue-500/20 transition-all duration-300">
                   {/* Number */}
-                  <div className="absolute top-4 right-4 text-5xl md:text-6xl font-light text-blue-200/40 dark:text-blue-500/20" aria-hidden="true">
+                  <div className="absolute top-4 right-4 text-6xl font-light text-blue-200/40 dark:text-blue-500/20" aria-hidden="true">
                     {step.number}
                   </div>
 
                   {/* Content */}
-                  <div className="relative space-y-3 sm:space-y-4">
+                  <div className="relative space-y-4">
                     {/* Icon */}
-                    <div className="inline-flex p-3 md:p-4 rounded-2xl bg-white/80 dark:bg-blue-500/10 border border-blue-200/30 dark:border-blue-500/30 shadow-sm dark:shadow-blue-500/20" aria-hidden="true">
+                    <div className="inline-flex p-4 rounded-2xl bg-white/80 dark:bg-blue-500/10 border border-blue-200/30 dark:border-blue-500/30 shadow-sm dark:shadow-blue-500/20" aria-hidden="true">
                       <step.icon className="w-8 h-8 text-blue-500 dark:text-blue-400" />
                     </div>
 
@@ -95,7 +95,7 @@ function HowItWorksSectionComponent() {
           </div>
 
           {/* Video placeholder */}
-          <motion.div variants={fadeInUpVariants.item} className="mt-12 md:mt-16 max-w-3xl mx-auto" id="examples">
+          <motion.div variants={fadeInUpVariants.item} className="mt-16 max-w-3xl mx-auto" id="examples">
             <div 
               className="relative aspect-[9/16] md:aspect-video bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-slate-800/50 dark:to-slate-800/30 rounded-3xl overflow-hidden shadow-2xl dark:shadow-blue-500/30 border border-blue-200/50 dark:border-blue-500/30"
               role="img"

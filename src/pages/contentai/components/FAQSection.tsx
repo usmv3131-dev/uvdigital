@@ -59,7 +59,7 @@ function FAQSectionComponent() {
   return (
     <section 
       id="faq"
-      className="relative py-16 md:py-32 bg-white dark:bg-slate-900 transition-colors" 
+      className="relative py-20 md:py-32 bg-white dark:bg-slate-900 transition-colors" 
       aria-labelledby="faq-title"
       itemScope 
       itemType="https://schema.org/FAQPage"
@@ -83,7 +83,7 @@ function FAQSectionComponent() {
           />
 
           {/* FAQ List */}
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-4">
             {faqs.map((faq, index) => (
               <motion.div
                 key={index}
@@ -96,7 +96,7 @@ function FAQSectionComponent() {
                   {/* Question */}
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className="w-full px-5 sm:px-6 py-4 sm:py-5 flex items-start justify-between gap-4 text-left hover:bg-white/50 dark:hover:bg-slate-700/30 transition-colors"
+                    className="w-full px-6 py-5 flex items-start justify-between gap-4 text-left hover:bg-white/50 dark:hover:bg-slate-700/30 transition-colors"
                     aria-expanded={openIndex === index}
                     aria-controls={`faq-answer-${index}`}
                   >
@@ -137,7 +137,7 @@ function FAQSectionComponent() {
                     itemProp="acceptedAnswer"
                     itemType="https://schema.org/Answer"
                   >
-                    <div className="px-5 sm:px-6 pb-4 sm:pb-5 pt-2">
+                    <div className="px-6 pb-5 pt-2">
                       <div className="pt-3 border-t border-blue-200/50 dark:border-blue-500/20">
                         <p 
                           className="text-slate-600 dark:text-cyan-300/70 leading-relaxed" 
@@ -160,8 +160,8 @@ function FAQSectionComponent() {
           </div>
 
           {/* Bottom CTA */}
-          <motion.div variants={fadeInUpVariants.item} className="mt-10 md:mt-12 text-center">
-            <div className="inline-flex flex-col items-center gap-4 p-6 md:p-8 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800/50 dark:to-slate-800/30 border border-blue-200/50 dark:border-blue-500/30 rounded-3xl">
+          <motion.div variants={fadeInUpVariants.item} className="mt-12 text-center">
+            <div className="inline-flex flex-col items-center gap-4 p-8 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800/50 dark:to-slate-800/30 border border-blue-200/50 dark:border-blue-500/30 rounded-3xl">
               <p className="text-slate-600 dark:text-cyan-300/70" style={{ fontFamily: 'var(--font-body)' }}>
                 Не нашли ответ на свой вопрос?
               </p>
@@ -172,7 +172,7 @@ function FAQSectionComponent() {
                   document.getElementById("contact");
                   contactSection?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 text-white rounded-2xl hover:from-blue-600 hover:to-cyan-600 dark:hover:from-blue-300 dark:hover:to-cyan-300 transition-all shadow-lg shadow-blue-300/30 dark:shadow-blue-500/50 font-semibold tracking-wide"
+                className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 text-white rounded-2xl hover:from-blue-600 hover:to-cyan-600 dark:hover:from-blue-300 dark:hover:to-cyan-300 transition-all shadow-lg shadow-blue-300/30 dark:shadow-blue-500/50 font-semibold tracking-wide"
               >
                 Задайте вопрос нам
               </button>

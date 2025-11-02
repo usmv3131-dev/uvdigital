@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&utm_id / 
+Clean-param: gclid&yclid / 
+
+Sitemap: https://uvdigital.ru/sitemap.xml
+Host: uvdigital.ru
