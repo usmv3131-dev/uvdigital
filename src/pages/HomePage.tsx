@@ -51,22 +51,22 @@ export function HomePage() {
       <Navbar />
       <main id="main-content">
         <HeroModern />
-        <DeferredSection fallback={<SectionPlaceholder title="Услуги" />}>
+        <DeferredSection sectionId="services" fallback={<SectionPlaceholder title="Услуги" />}>
           <Suspense fallback={<SectionPlaceholder title="Услуги" />}>
             <ServicesSection />
           </Suspense>
         </DeferredSection>
-        <DeferredSection fallback={<SectionPlaceholder title="Проекты" />}>
+        <DeferredSection sectionId="projects" fallback={<SectionPlaceholder title="Проекты" />}>
           <Suspense fallback={<SectionPlaceholder title="Проекты" />}>
             <ProjectsSection />
           </Suspense>
         </DeferredSection>
-        <DeferredSection fallback={<SectionPlaceholder title="Преимущества" />}>
+        <DeferredSection sectionId="advantages" fallback={<SectionPlaceholder title="Преимущества" />}>
           <Suspense fallback={<SectionPlaceholder title="Преимущества" />}>
             <AdvantagesSection />
           </Suspense>
         </DeferredSection>
-        <DeferredSection fallback={<SectionPlaceholder title="Контакты" />}>
+        <DeferredSection sectionId="contact" fallback={<SectionPlaceholder title="Контакты" />}>
           <Suspense fallback={<SectionPlaceholder title="Контакты" />}>
             <ContactFormSection />
           </Suspense>

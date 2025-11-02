@@ -198,11 +198,17 @@ export function HeroModern() {
   const orbY2 = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
 
   const scrollToContact = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    const target =
+      document.getElementById("contact") ||
+      (document.querySelector('[data-section-id="contact"]') as HTMLElement | null);
+    target?.scrollIntoView({ behavior: "smooth" });
   };
 
   const scrollToProjects = () => {
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+    const target =
+      document.getElementById("projects") ||
+      (document.querySelector('[data-section-id="projects"]') as HTMLElement | null);
+    target?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -211,10 +217,10 @@ export function HeroModern() {
       className="relative min-h-[50vh] md:min-h-screen overflow-hidden bg-black"
     >
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-pink-900/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-pink-900/20 pointer-events-none" />
 
       {/* Animated grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)] pointer-events-none" />
 
       {/* Floating orbs with layered parallax */}
       <motion.div
@@ -229,7 +235,7 @@ export function HeroModern() {
             ? undefined
             : { duration: 20, repeat: Infinity, ease: "easeInOut" }
         }
-        className="absolute top-10 -left-20 w-48 h-48 md:w-80 md:h-80 xl:w-96 xl:h-96 bg-purple-500/20 rounded-full blur-3xl"
+        className="absolute top-10 -left-20 w-48 h-48 md:w-80 md:h-80 xl:w-96 xl:h-96 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"
       />
       <motion.div
         style={reducedMotion ? undefined : { y: orbY2 }}
@@ -243,7 +249,7 @@ export function HeroModern() {
             ? undefined
             : { duration: 25, repeat: Infinity, ease: "easeInOut" }
         }
-        className="absolute -bottom-10 -right-20 w-56 h-56 md:w-96 md:h-96 xl:w-[400px] xl:h-[400px] bg-pink-500/20 rounded-full blur-3xl"
+        className="absolute -bottom-10 -right-20 w-56 h-56 md:w-96 md:h-96 xl:w-[400px] xl:h-[400px] bg-pink-500/20 rounded-full blur-3xl pointer-events-none"
       />
 
       {/* Additional depth layers */}
@@ -261,7 +267,7 @@ export function HeroModern() {
             ? undefined
             : { duration: 15, repeat: Infinity, ease: "easeInOut" }
         }
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-blue-500/15 rounded-full blur-3xl"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"
       />
 
       {/* Hero Content */}

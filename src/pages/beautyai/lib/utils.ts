@@ -16,7 +16,13 @@ export function cn(...inputs: ClassValue[]) {
  * @param elementId - ID of the element to scroll to
  */
 export function scrollToElement(elementId: string): void {
-  const element = document.getElementById(elementId);
+  let element = document.getElementById(elementId);
+  if (!element && typeof window !== "undefined") {
+    const scopedRoot = window.__SCOPED_ROOTS__?.beautyai;
+    if (scopedRoot) {
+      element = scopedRoot.querySelector(`#${elementId}`);
+    }
+  }
   element?.scrollIntoView({ behavior: "smooth" });
 }
 

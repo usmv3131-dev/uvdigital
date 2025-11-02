@@ -25,9 +25,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   });
 
   useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
-    root.classList.add(theme);
+    const target = window.__SCOPED_ROOTS__?.contentai ?? window.document.documentElement;
+    target.classList.remove("light", "dark");
+    target.classList.add(theme);
     localStorage.setItem("beauty-ai-theme", theme);
   }, [theme]);
 

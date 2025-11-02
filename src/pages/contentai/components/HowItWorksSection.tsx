@@ -30,7 +30,7 @@ function HowItWorksSectionComponent() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-20 md:py-32 bg-white dark:bg-slate-900 transition-colors" aria-labelledby="how-it-works-title">
+    <section id="how-it-works" className="relative py-20 md:py-32 bg-white dark:bg-slate-900 transition-colors" aria-labelledby="how-it-works-title">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
@@ -95,7 +95,7 @@ function HowItWorksSectionComponent() {
           </div>
 
           {/* Video placeholder */}
-          <motion.div variants={fadeInUpVariants.item} className="mt-16 max-w-3xl mx-auto">
+          <motion.div variants={fadeInUpVariants.item} className="mt-16 max-w-3xl mx-auto" id="examples">
             <div 
               className="relative aspect-[9/16] md:aspect-video bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-slate-800/50 dark:to-slate-800/30 rounded-3xl overflow-hidden shadow-2xl dark:shadow-blue-500/30 border border-blue-200/50 dark:border-blue-500/30"
               role="img"
@@ -104,6 +104,12 @@ function HowItWorksSectionComponent() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center space-y-4">
                   <button
+                    onClick={() => {
+                      const examplesSection =
+                        window.__SCOPED_ROOTS__?.contentai?.querySelector("#examples") ||
+                        document.getElementById("examples");
+                      examplesSection?.scrollIntoView({ behavior: "smooth" });
+                    }}
                     className="w-20 h-20 bg-white/80 dark:bg-blue-500/20 rounded-full flex items-center justify-center mx-auto shadow-lg dark:shadow-blue-500/50 backdrop-blur-sm hover:scale-110 transition-transform border dark:border-blue-500/50"
                     aria-label="Посмотреть примеры"
                   >

@@ -275,12 +275,14 @@ function FeaturesSectionComponent() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const scrollToContact = () => {
-    const contactSection = document.getElementById("contact");
+    const contactSection =
+      window.__SCOPED_ROOTS__?.contentai?.querySelector("#contact") ||
+      document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 transition-colors overflow-hidden" aria-labelledby="features-title">
+    <section id="features" className="relative py-20 md:py-32 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-950 dark:to-slate-900 transition-colors overflow-hidden" aria-labelledby="features-title">
       <BackgroundDecoration />
 
       {/* Parallax floating elements */}

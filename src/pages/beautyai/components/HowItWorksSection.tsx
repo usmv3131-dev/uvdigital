@@ -35,7 +35,7 @@ function HowItWorksSectionComponent() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-white via-rose-50/30 to-pink-50/30 dark:from-slate-900 dark:via-purple-950/30 dark:to-slate-900 transition-colors overflow-hidden" aria-labelledby="how-it-works-title">
+    <section id="how-it-works" className="relative py-20 md:py-32 bg-gradient-to-br from-white via-rose-50/30 to-pink-50/30 dark:from-slate-900 dark:via-purple-950/30 dark:to-slate-900 transition-colors overflow-hidden" aria-labelledby="how-it-works-title">
       {/* Mesh Gradient */}
       <MeshGradient variant="secondary" />
 
@@ -117,7 +117,7 @@ function HowItWorksSectionComponent() {
           </div>
 
           {/* 3D Video placeholder */}
-          <motion.div variants={fadeInUpVariants.item} className="mt-20 max-w-4xl mx-auto">
+          <motion.div variants={fadeInUpVariants.item} className="mt-20 max-w-4xl mx-auto" id="demo">
             <Card3D intensity={10}>
               <GlassPanel variant="primary">
                 <div 

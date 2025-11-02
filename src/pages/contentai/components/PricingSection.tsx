@@ -9,7 +9,9 @@ function PricingSectionComponent() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const scrollToContact = () => {
-    const contactSection = document.getElementById("contact");
+    const contactSection =
+      window.__SCOPED_ROOTS__?.contentai?.querySelector("#contact") ||
+      document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -54,6 +56,7 @@ function PricingSectionComponent() {
 
   return (
     <section 
+      id="pricing"
       className="relative py-20 md:py-32 bg-white dark:bg-slate-900 overflow-hidden transition-colors" 
       aria-labelledby="pricing-title"
       ref={ref}

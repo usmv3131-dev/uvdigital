@@ -61,6 +61,7 @@ function FAQSectionComponent() {
 
   return (
     <section
+      id="faq"
       className="relative py-20 md:py-32 bg-white dark:bg-slate-900 transition-colors"
       aria-labelledby="faq-title"
       itemScope

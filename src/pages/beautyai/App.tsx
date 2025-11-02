@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, ReactNode } from "react";
 import { Navigation } from "./components/Navigation";
 import { HeroSection } from "./components/HeroSection";
 import { ThemeProvider } from "./lib/theme-context";
@@ -42,6 +42,18 @@ function SectionSkeleton() {
   );
 }
 
+function SectionFallback({ sectionId }: { sectionId: string }) {
+  return (
+    <section id={sectionId} data-section-id={sectionId} aria-hidden="true">
+      <SectionSkeleton />
+    </section>
+  );
+}
+
+function SuspenseSection({ sectionId, children }: { sectionId: string; children: ReactNode }) {
+  return <Suspense fallback={<SectionFallback sectionId={sectionId} />}>{children}</Suspense>;
+}
+
 export default function App() {
   return (
     <ThemeProvider>
@@ -55,21 +67,21 @@ export default function App() {
         <Navigation />
         <main>
           <HeroSection />
-          <Suspense fallback={<SectionSkeleton />}>
+          <SuspenseSection sectionId="how-it-works">
             <HowItWorksSection />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
+          </SuspenseSection>
+          <SuspenseSection sectionId="features">
             <FeaturesSection />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
+          </SuspenseSection>
+          <SuspenseSection sectionId="pricing">
             <PricingSection />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
+          </SuspenseSection>
+          <SuspenseSection sectionId="faq">
             <FAQSection />
-          </Suspense>
-          <Suspense fallback={<SectionSkeleton />}>
+          </SuspenseSection>
+          <SuspenseSection sectionId="contact">
             <ContactFormSection />
-          </Suspense>
+          </SuspenseSection>
         </main>
         
         {/* Footer for better semantic structure */}

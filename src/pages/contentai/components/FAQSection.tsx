@@ -58,6 +58,7 @@ function FAQSectionComponent() {
 
   return (
     <section 
+      id="faq"
       className="relative py-20 md:py-32 bg-white dark:bg-slate-900 transition-colors" 
       aria-labelledby="faq-title"
       itemScope 
@@ -166,7 +167,9 @@ function FAQSectionComponent() {
               </p>
               <button
                 onClick={() => {
-                  const contactSection = document.getElementById("contact");
+                const contactSection =
+                  window.__SCOPED_ROOTS__?.contentai?.querySelector("#contact") ||
+                  document.getElementById("contact");
                   contactSection?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 text-white rounded-2xl hover:from-blue-600 hover:to-cyan-600 dark:hover:from-blue-300 dark:hover:to-cyan-300 transition-all shadow-lg shadow-blue-300/30 dark:shadow-blue-500/50 font-semibold tracking-wide"

@@ -3,12 +3,14 @@ import { PropsWithChildren, ReactNode, useEffect, useRef, useState } from "react
 type DeferredSectionProps = PropsWithChildren<{
   fallback?: ReactNode;
   rootMargin?: string;
+  sectionId?: string;
 }>;
 
 export function DeferredSection({
   children,
   fallback = null,
   rootMargin = "200px",
+  sectionId,
 }: DeferredSectionProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -37,7 +39,7 @@ export function DeferredSection({
   }, [isVisible, rootMargin]);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} data-section-id={sectionId}>
       {isVisible ? children : fallback}
     </div>
   );

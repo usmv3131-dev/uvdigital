@@ -35,8 +35,19 @@ function HeroSectionComponent() {
   };
 
   const scrollToContact = () => {
-    const contactSection = document.getElementById("contact");
+    const contactSection =
+      window.__SCOPED_ROOTS__?.contentai?.querySelector("#contact") ||
+      document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToExamples = () => {
+    const examplesSection =
+      window.__SCOPED_ROOTS__?.contentai?.querySelector("#examples") ||
+      document.getElementById("examples") ||
+      window.__SCOPED_ROOTS__?.contentai?.querySelector("#how-it-works") ||
+      document.getElementById("how-it-works");
+    examplesSection?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -249,7 +260,7 @@ function HeroSectionComponent() {
             </motion.div>
 
             <MagneticButton
-              onClick={scrollToContact}
+              onClick={scrollToExamples}
               className="px-8 py-4 bg-white/60 dark:bg-blue-500/10 backdrop-blur-sm text-blue-900 dark:text-blue-400 border border-blue-200/50 dark:border-blue-500/50 rounded-2xl hover:bg-white/80 dark:hover:bg-blue-500/20 transition-all font-semibold tracking-wide shadow-lg"
               strength={0.2}
             >

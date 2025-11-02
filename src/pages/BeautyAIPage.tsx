@@ -4,7 +4,7 @@ import { ScopedStyleHost } from "../components/ScopedStyleHost";
 
 export default function BeautyAIPage() {
   return (
-    <ScopedStyleHost styles={beautyStyles}>
+    <ScopedStyleHost styles={beautyStyles} scopeId="beautyai">
       <BeautyAIApp />
     </ScopedStyleHost>
   );

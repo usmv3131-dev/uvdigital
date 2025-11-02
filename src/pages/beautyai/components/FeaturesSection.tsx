@@ -53,7 +53,7 @@ function FeaturesSectionComponent() {
   const scrollToContact = useCallback(() => scrollToElement("contact"), []);
 
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-rose-50 via-orange-50/50 to-pink-50 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950 transition-colors overflow-hidden" aria-labelledby="features-title">
+    <section id="features" className="relative py-20 md:py-32 bg-gradient-to-br from-rose-50 via-orange-50/50 to-pink-50 dark:from-slate-950 dark:via-purple-950 dark:to-slate-950 transition-colors overflow-hidden" aria-labelledby="features-title">
       <MeshGradient variant="accent" />
       <ParticleField count={40} />
 

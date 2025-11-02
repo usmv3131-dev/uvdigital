@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState, ReactNode, memo } from "react";
+import { useEffect, useMemo, useState, ReactNode, memo, useId, useRef } from "react";
 import { Sparkle } from "lucide-react";
 import { loadFull } from "tsparticles";
 
-import type { ISourceOptions } from "@tsparticles/engine";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
+import type { Container, ISourceOptions } from "@tsparticles/engine";
+import { tsParticles } from "@tsparticles/engine";
 import { cn } from "./utils";
 
 /**
@@ -12,16 +12,11 @@ import { cn } from "./utils";
  */
 
 // Singleton: particles engine initialization
-let particlesEngineInitialized = false;
 let particlesEnginePromise: Promise<void> | null = null;
 
 const initParticlesEngineSingleton = () => {
   if (!particlesEnginePromise) {
-    particlesEnginePromise = initParticlesEngine(async (engine) => {
-      await loadFull(engine);
-    }).then(() => {
-      particlesEngineInitialized = true;
-    });
+    particlesEnginePromise = loadFull(tsParticles);
   }
   return particlesEnginePromise;
 };
@@ -30,6 +25,7 @@ const initParticlesEngineSingleton = () => {
 const particlesOptions: ISourceOptions = {
   key: "star",
   name: "Star",
+  autoPlay: false,
   particles: {
     number: {
       value: 15, // Reduced from 20 for better performance
@@ -185,23 +181,92 @@ function SparkleButtonComponent({
 }: SparkleButtonProps) {
   const [particleState, setParticlesReady] = useState<"loading" | "loaded" | "ready">("loading");
   const [isHovering, setIsHovering] = useState(false);
+  const [particlesContainer, setParticlesContainer] = useState<Container | null>(null);
+  const particlesRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Use singleton initialization
     initParticlesEngineSingleton().then(() => {
       setParticlesReady("loaded");
     });
   }, []);
 
-  // Memoize options to prevent unnecessary recalculations
-  const modifiedOptions = useMemo(() => {
-    const options = { ...particlesOptions };
-    options.autoPlay = isHovering;
-    return options;
-  }, [isHovering]);
+  const rawId = useId();
+  const particlesId = useMemo(() => `sparkle-particles-${rawId.replace(/[:]/g, "")}`, [rawId]);
 
-  // Generate stable ID (only once)
-  const particlesId = useMemo(() => `sparkle-particles-${Math.random().toString(36).slice(2, 9)}`, []);
+  useEffect(() => {
+    if (particleState !== "loaded" || !particlesRef.current) {
+      return;
+    }
+
+    let disposed = false;
+    let containerInstance: Container | undefined;
+
+    const mountParticles = async () => {
+      await initParticlesEngineSingleton();
+
+      if (disposed || !particlesRef.current) {
+        return;
+      }
+
+      // Clean up any stale instances registered under the same id
+      tsParticles
+        .dom()
+        .filter((item) => item.id === particlesId)
+        .forEach((item) => item.destroy());
+
+      containerInstance = await tsParticles.load({
+        id: particlesId,
+        element: particlesRef.current,
+        options: particlesOptions,
+      });
+
+      if (!containerInstance) {
+        return;
+      }
+
+      if (disposed) {
+        containerInstance.destroy();
+        return;
+      }
+
+      containerInstance.pause();
+      setParticlesContainer(containerInstance);
+      setParticlesReady("ready");
+    };
+
+    mountParticles();
+
+    return () => {
+      disposed = true;
+      setParticlesContainer(null);
+
+      if (containerInstance) {
+        containerInstance.destroy();
+      } else {
+        tsParticles
+          .dom()
+          .filter((item) => item.id === particlesId)
+          .forEach((item) => item.destroy());
+      }
+    };
+  }, [particleState, particlesId]);
+
+  useEffect(() => {
+    if (!particlesContainer) {
+      return;
+    }
+
+    if (disabled) {
+      particlesContainer.pause();
+      return;
+    }
+
+    if (isHovering) {
+      particlesContainer.play();
+    } else {
+      particlesContainer.pause();
+    }
+  }, [particlesContainer, isHovering, disabled]);
 
   return (
     <button
@@ -222,18 +287,16 @@ function SparkleButtonComponent({
       </div>
       
       {particleState !== "loading" && (
-        <Particles
+        <div
           id={particlesId}
+          ref={particlesRef}
           className={cn(
             "pointer-events-none absolute -bottom-4 -left-4 -right-4 -top-4 z-0 opacity-0 transition-opacity duration-300",
             {
               "group-hover:opacity-100": particleState === "ready" && !disabled,
             }
           )}
-          particlesLoaded={async () => {
-            setParticlesReady("ready");
-          }}
-          options={modifiedOptions}
+          aria-hidden="true"
         />
       )}
     </button>

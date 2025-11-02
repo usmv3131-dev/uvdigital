@@ -46,7 +46,8 @@ export default function App() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
+    const scopedRoot = window.__SCOPED_ROOTS__?.aimarketing;
+    const element = scopedRoot?.querySelector(`#${id}`) || document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }

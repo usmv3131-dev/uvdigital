@@ -29,7 +29,9 @@ export function Navbar() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
+    const element =
+      document.getElementById(id) ||
+      (document.querySelector(`[data-section-id="${id}"]`) as HTMLElement | null);
     element?.scrollIntoView({ behavior: "smooth" });
     setIsOpen(false);
   };
@@ -51,7 +53,8 @@ export function Navbar() {
         }}
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       >
-        <div className="absolute inset-0 border-b border-white/10" 
+        <div
+          className="absolute inset-0 border-b border-white/10 pointer-events-none"
           style={{
             opacity: isScrolled ? 1 : 0,
             transition: "opacity 0.3s ease"

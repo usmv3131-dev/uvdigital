@@ -20,7 +20,9 @@ function NavigationComponent() {
 
   // Memoize scroll to contact handler
   const scrollToContact = useCallback(() => {
-    const contactSection = document.getElementById("contact");
+    const contactSection =
+      window.__SCOPED_ROOTS__?.contentai?.querySelector("#contact") ||
+      document.getElementById("contact");
     contactSection?.scrollIntoView({ behavior: "smooth" });
   }, []);
 

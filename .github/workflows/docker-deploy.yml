@@ -56,7 +56,57 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Deploy instructions
-        run: |
-          echo "Image pushed to ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
-          echo "Deploy this image on your server using docker pull and docker compose."
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure deploy directory exists
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT || '22' }}
+          script: mkdir -p "${{ secrets.DEPLOY_PATH }}"
+
+      - name: Copy deployment bundle to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT || '22' }}
+          source: deploy/*
+          target: ${{ secrets.DEPLOY_PATH }}
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.2
+        env:
+          REGISTRY: ${{ env.REGISTRY }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          GITHUB_SHA: ${{ github.sha }}
+          HOST_PORT: ${{ secrets.DEPLOY_HOST_PORT || '3000' }}
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT || '22' }}
+          envs: REGISTRY,IMAGE_NAME,GITHUB_SHA,HOST_PORT
+          script_stop: true
+          command_timeout: 30m
+          script: |
+            set -euo pipefail
+            cd "${{ secrets.DEPLOY_PATH }}"
+
+            IMAGE_REF="${REGISTRY}/${IMAGE_NAME}:${GITHUB_SHA}"
+            docker login "${REGISTRY}" -u "${{ secrets.GHCR_USERNAME }}" -p "${{ secrets.GHCR_TOKEN }}"
+            docker pull "${IMAGE_REF}"
+
+            cat <<EOF > .env
+DOCKER_IMAGE=${IMAGE_REF}
+APP_ENV=production
+APP_PORT=8080
+HOST_PORT=${HOST_PORT}
+EOF
+
+            docker compose pull app
+            docker compose up -d --remove-orphans

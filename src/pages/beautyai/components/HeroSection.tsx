@@ -12,6 +12,7 @@ import { Card3D } from "./ui/card-3d";
 
 function HeroSectionComponent() {
   const scrollToContact = useCallback(() => scrollToElement("contact"), []);
+  const scrollToDemo = useCallback(() => scrollToElement("demo"), []);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -168,6 +169,7 @@ function HeroSectionComponent() {
                 whileTap={{ scale: 0.97 }}
               >
                 <ButtonGlass
+                  onClick={scrollToDemo}
                   className="rounded-full px-8 py-3.5 text-base shadow-lg"
                   aria-label="Посмотреть демо"
                 >

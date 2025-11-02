@@ -1,9 +1,10 @@
 services:
   app:
-    image: ghcr.io/YOUR_ORG/YOUR_REPO:latest
+    image: ${DOCKER_IMAGE:?ghcr.io/owner/repo:latest}
+    container_name: uvdigital-app
     environment:
-      APP_ENV: production
-      PORT: 3000
+      APP_ENV: ${APP_ENV:-production}
+      PORT: ${APP_PORT:-8080}
     ports:
-      - "3000:8080"
+      - "${HOST_PORT:-3000}:8080"
     restart: unless-stopped

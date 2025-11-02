@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, ReactNode } from "react";
 import { ThemeProvider } from "./lib/theme-context";
 import { Navigation } from "./components/Navigation";
 import { SEOHead, StructuredData } from "./components/SEOHead";
@@ -50,6 +50,18 @@ function SectionSkeleton() {
   );
 }
 
+function SectionFallback({ sectionId }: { sectionId: string }) {
+  return (
+    <section id={sectionId} data-section-id={sectionId} aria-hidden="true">
+      <SectionSkeleton />
+    </section>
+  );
+}
+
+function SuspenseSection({ sectionId, children }: { sectionId: string; children: ReactNode }) {
+  return <Suspense fallback={<SectionFallback sectionId={sectionId} />}>{children}</Suspense>;
+}
+
 export default function App() {
   return (
     <ThemeProvider>
@@ -64,34 +76,34 @@ export default function App() {
         {/* Main Content */}
         <main id="main-content" role="main">
           {/* Hero Section */}
-          <Suspense fallback={<SectionSkeleton />}>
+          <SuspenseSection sectionId="hero">
             <HeroSection />
-          </Suspense>
+          </SuspenseSection>
 
           {/* How It Works Section */}
-          <Suspense fallback={<SectionSkeleton />}>
+          <SuspenseSection sectionId="how-it-works">
             <HowItWorksSection />
-          </Suspense>
+          </SuspenseSection>
 
           {/* Features Section */}
-          <Suspense fallback={<SectionSkeleton />}>
+          <SuspenseSection sectionId="features">
             <FeaturesSection />
-          </Suspense>
+          </SuspenseSection>
 
           {/* Pricing Section */}
-          <Suspense fallback={<SectionSkeleton />}>
+          <SuspenseSection sectionId="pricing">
             <PricingSection />
-          </Suspense>
+          </SuspenseSection>
 
           {/* FAQ Section - Important for SEO */}
-          <Suspense fallback={<SectionSkeleton />}>
+          <SuspenseSection sectionId="faq">
             <FAQSection />
-          </Suspense>
+          </SuspenseSection>
 
           {/* Contact Form Section */}
-          <Suspense fallback={<SectionSkeleton />}>
+          <SuspenseSection sectionId="contact">
             <ContactFormSection />
-          </Suspense>
+          </SuspenseSection>
         </main>
 
         {/* Footer (optional, можно добавить позже) */}
